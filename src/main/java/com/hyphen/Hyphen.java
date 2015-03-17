@@ -126,6 +126,11 @@ public class Hyphen {
         return result;
     }
 
+    public static <O, F, T extends Collection<F> > List<O> flatMap( T list, Function<F, List<O>> mapper) {
+        return list.stream().flatMap(f -> mapper.apply(f).stream()).collect(toList());
+    }
+
+
     public static <O, T extends Collection<O>> T without(T collection, O... ignores) {
         return (T) filter(collection, new IgnorePredicate(ignores));
     }

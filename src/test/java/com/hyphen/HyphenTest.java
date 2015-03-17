@@ -1,6 +1,7 @@
 package com.hyphen;
 
 import com.hyphen.model.Data;
+import com.hyphen.model.ListModel;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -253,6 +254,17 @@ public class HyphenTest {
         List<Object> list1 = asList(asList(data1, data2), asList(data3));
         assertThat(flatten(list1).size(), is(3));
 
+    }
+
+    @Test
+    public void testFlatMap() {
+        ListModel listModel1 = new ListModel(asList(1, 2, 4));
+        ListModel listModel2 = new ListModel(asList(2,3));
+
+        List<Integer> numbers = flatMap(asList(listModel1, listModel2), ListModel::getNumbers);
+
+        assertThat(numbers.size(), is(5));
+        assertEquals(numbers, asList(1,2,4,2,3));
     }
 
     @Test
